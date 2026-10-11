@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SoFilNet Audio Samples</title>
-<meta name="description" content="Audio samples for SoFilNet: speech resynthesized from self-supervised source-filter parameters.">
+<meta name="description" content="Audio samples for SoFilNet.">
 <style>
 :root {
   --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --line: #d1d9e0; --accent: #0969da; --soft: #f6f8fa;
@@ -22,14 +22,9 @@ h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 8px; }
 h2 { font-size: 1.4rem; margin: 48px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
 p { margin: 0 0 12px; max-width: 75ch; }
 .sub { color: var(--muted); font-size: 1.05rem; margin-bottom: 24px; }
-dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 16px 0; }
-dt { font-weight: 600; }
-dd { margin: 0; color: var(--muted); }
 table { border-collapse: collapse; width: 100%; }
 th, td { border-bottom: 1px solid var(--line); padding: 12px 10px; text-align: left; vertical-align: top; }
 thead th { background: var(--soft); font-size: .9rem; }
-.summary { max-width: 520px; }
-.summary td { font-variant-numeric: tabular-nums; }
 .scroll { overflow-x: auto; }
 .samples { min-width: 980px; }
 .samples th[scope=row] { width: 230px; font-weight: normal; }
@@ -38,9 +33,7 @@ thead th { background: var(--soft); font-size: .9rem; }
 .meta { color: var(--muted); font-size: .85rem; }
 .text { font-style: italic; font-size: .9rem; margin-top: 4px; }
 audio { width: 100%; min-width: 170px; height: 36px; }
-.score { color: var(--muted); font-size: .8rem; margin-top: 4px; font-variant-numeric: tabular-nums; }
 a { color: var(--accent); }
-@media (max-width: 600px) { dl { grid-template-columns: 1fr; } dd { margin-bottom: 8px; } }
 </style>
 </head>
 <body>
@@ -48,34 +41,20 @@ a { color: var(--accent); }
 <h1>SoFilNet: Self-Supervised Source-Filter Model of Speech Production</h1>
 <p class="sub">Audio samples</p>
 
-<p>SoFilNet estimates, for every 10&nbsp;ms frame, 28 interpretable parameters of a source-filter model of speech:
-F0, voicing, five band aperiodicities and a gain for the glottal source, and the radii and frequencies of eight
-pole pairs and two zero pairs for the vocal-tract filter. It is trained on TIMIT without any F0, formant or voicing
-labels. The samples below show how much of the speech signal these parameters retain (Table V of the paper).</p>
-
-<h2>Conditions</h2>
-<dl><dt>Original</dt><dd>The input recording.</dd><dt>Parameters only</dt><dd>Synthesized from the 28 estimated parameters per frame alone: harmonic + noise source through the pole-zero filter.</dd><dt>Estimated magnitude, original phase</dt><dd>Estimated spectrum combined with the phase of the recording.</dd><dt>Original magnitude, estimated phase</dt><dd>Spectrum of the recording combined with the phase of the parameter-only synthesis.</dd></dl>
-<p>Mean wideband PESQ and STOI over the 192 VTR-FORMANTS test utterances (Table V):</p>
-<table class="summary">
-<thead><tr><th scope="col">Condition</th><th scope="col">PESQ</th><th scope="col">STOI</th></tr></thead>
-<tbody><tr><th scope="row">Original</th><td>4.64</td><td>1.000</td></tr><tr><th scope="row">Parameters only</th><td>2.12</td><td>0.903</td></tr><tr><th scope="row">Estimated magnitude, original phase</th><td>3.02</td><td>0.951</td></tr><tr><th scope="row">Original magnitude, estimated phase</th><td>3.20</td><td>0.966</td></tr></tbody>
-</table>
-
 <h2>Samples</h2>
-<p>Utterances from the TIMIT test set (VTR-FORMANTS subset), unseen during training. All audio is 16&nbsp;kHz.
-The score under each sample is that sample's PESQ and STOI against the original.</p>
+<p>Utterances from the TIMIT test set (VTR-FORMANTS subset), unseen during training. All audio is 16&nbsp;kHz.</p>
 <div class="scroll">
 <table class="samples">
 <thead><tr><th scope="col">Utterance</th><th scope="col"><span class="cond">Original</span></th><th scope="col"><span class="cond">Parameters only</span></th><th scope="col"><span class="cond">Estimated magnitude, original phase</span></th><th scope="col"><span class="cond">Original magnitude, estimated phase</span></th></tr></thead>
 <tbody>
-<tr><th scope="row"><div class="utt">dr1/felc0/si2016</div><div class="meta">Female speaker</div><div class="text">“Heave on those ropes the boat&#x27;s come unstuck.”</div></th><td><audio controls preload="none" src="audio/dr1_felc0_si2016_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr1_felc0_si2016_vocoder.wav"></audio><div class="score">PESQ 1.88 · STOI 0.912</div></td><td><audio controls preload="none" src="audio/dr1_felc0_si2016_target_phase.wav"></audio><div class="score">PESQ 2.73 · STOI 0.955</div></td><td><audio controls preload="none" src="audio/dr1_felc0_si2016_vocoder_phase.wav"></audio><div class="score">PESQ 2.96 · STOI 0.964</div></td></tr>
-<tr><th scope="row"><div class="utt">dr2/mwew0/sx11</div><div class="meta">Male speaker</div><div class="text">“He will allow a rare lie.”</div></th><td><audio controls preload="none" src="audio/dr2_mwew0_sx11_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr2_mwew0_sx11_vocoder.wav"></audio><div class="score">PESQ 2.68 · STOI 0.876</div></td><td><audio controls preload="none" src="audio/dr2_mwew0_sx11_target_phase.wav"></audio><div class="score">PESQ 3.32 · STOI 0.899</div></td><td><audio controls preload="none" src="audio/dr2_mwew0_sx11_vocoder_phase.wav"></audio><div class="score">PESQ 3.73 · STOI 0.973</div></td></tr>
-<tr><th scope="row"><div class="utt">dr2/fpas0/si944</div><div class="meta">Female speaker</div><div class="text">“If the farm is rented the rent must be paid.”</div></th><td><audio controls preload="none" src="audio/dr2_fpas0_si944_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr2_fpas0_si944_vocoder.wav"></audio><div class="score">PESQ 1.65 · STOI 0.879</div></td><td><audio controls preload="none" src="audio/dr2_fpas0_si944_target_phase.wav"></audio><div class="score">PESQ 1.92 · STOI 0.933</div></td><td><audio controls preload="none" src="audio/dr2_fpas0_si944_vocoder_phase.wav"></audio><div class="score">PESQ 2.77 · STOI 0.953</div></td></tr>
-<tr><th scope="row"><div class="utt">dr8/mjln0/si1449</div><div class="meta">Male speaker</div><div class="text">“Chief interest in radiosterilization resides in the military services.”</div></th><td><audio controls preload="none" src="audio/dr8_mjln0_si1449_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr8_mjln0_si1449_vocoder.wav"></audio><div class="score">PESQ 2.31 · STOI 0.895</div></td><td><audio controls preload="none" src="audio/dr8_mjln0_si1449_target_phase.wav"></audio><div class="score">PESQ 3.62 · STOI 0.947</div></td><td><audio controls preload="none" src="audio/dr8_mjln0_si1449_vocoder_phase.wav"></audio><div class="score">PESQ 3.39 · STOI 0.966</div></td></tr>
-<tr><th scope="row"><div class="utt">dr4/fjlm0/si1043</div><div class="meta">Female speaker</div><div class="text">“Not surprisingly this approach did not work.”</div></th><td><audio controls preload="none" src="audio/dr4_fjlm0_si1043_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr4_fjlm0_si1043_vocoder.wav"></audio><div class="score">PESQ 2.15 · STOI 0.903</div></td><td><audio controls preload="none" src="audio/dr4_fjlm0_si1043_target_phase.wav"></audio><div class="score">PESQ 2.74 · STOI 0.949</div></td><td><audio controls preload="none" src="audio/dr4_fjlm0_si1043_vocoder_phase.wav"></audio><div class="score">PESQ 2.97 · STOI 0.967</div></td></tr>
-<tr><th scope="row"><div class="utt">dr4/mtls0/si2000</div><div class="meta">Male speaker</div><div class="text">“We can get it if we dig he said patiently.”</div></th><td><audio controls preload="none" src="audio/dr4_mtls0_si2000_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr4_mtls0_si2000_vocoder.wav"></audio><div class="score">PESQ 2.09 · STOI 0.939</div></td><td><audio controls preload="none" src="audio/dr4_mtls0_si2000_target_phase.wav"></audio><div class="score">PESQ 3.40 · STOI 0.976</div></td><td><audio controls preload="none" src="audio/dr4_mtls0_si2000_vocoder_phase.wav"></audio><div class="score">PESQ 3.10 · STOI 0.976</div></td></tr>
-<tr><th scope="row"><div class="utt">dr7/fdhc0/si929</div><div class="meta">Female speaker</div><div class="text">“But such cases were in the past unusual.”</div></th><td><audio controls preload="none" src="audio/dr7_fdhc0_si929_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr7_fdhc0_si929_vocoder.wav"></audio><div class="score">PESQ 1.84 · STOI 0.903</div></td><td><audio controls preload="none" src="audio/dr7_fdhc0_si929_target_phase.wav"></audio><div class="score">PESQ 2.41 · STOI 0.941</div></td><td><audio controls preload="none" src="audio/dr7_fdhc0_si929_vocoder_phase.wav"></audio><div class="score">PESQ 2.80 · STOI 0.969</div></td></tr>
-<tr><th scope="row"><div class="utt">dr7/mgrt0/si2080</div><div class="meta">Male speaker</div><div class="text">“He would not carry a brief case.”</div></th><td><audio controls preload="none" src="audio/dr7_mgrt0_si2080_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr7_mgrt0_si2080_vocoder.wav"></audio><div class="score">PESQ 2.01 · STOI 0.898</div></td><td><audio controls preload="none" src="audio/dr7_mgrt0_si2080_target_phase.wav"></audio><div class="score">PESQ 3.00 · STOI 0.959</div></td><td><audio controls preload="none" src="audio/dr7_mgrt0_si2080_vocoder_phase.wav"></audio><div class="score">PESQ 2.92 · STOI 0.951</div></td></tr>
+<tr><th scope="row"><div class="utt">dr1/felc0/si2016</div><div class="meta">Female speaker</div><div class="text">“Heave on those ropes the boat&#x27;s come unstuck.”</div></th><td><audio controls preload="none" src="audio/dr1_felc0_si2016_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr1_felc0_si2016_vocoder.wav"></audio></td><td><audio controls preload="none" src="audio/dr1_felc0_si2016_target_phase.wav"></audio></td><td><audio controls preload="none" src="audio/dr1_felc0_si2016_vocoder_phase.wav"></audio></td></tr>
+<tr><th scope="row"><div class="utt">dr2/mwew0/sx11</div><div class="meta">Male speaker</div><div class="text">“He will allow a rare lie.”</div></th><td><audio controls preload="none" src="audio/dr2_mwew0_sx11_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr2_mwew0_sx11_vocoder.wav"></audio></td><td><audio controls preload="none" src="audio/dr2_mwew0_sx11_target_phase.wav"></audio></td><td><audio controls preload="none" src="audio/dr2_mwew0_sx11_vocoder_phase.wav"></audio></td></tr>
+<tr><th scope="row"><div class="utt">dr2/fpas0/si944</div><div class="meta">Female speaker</div><div class="text">“If the farm is rented the rent must be paid.”</div></th><td><audio controls preload="none" src="audio/dr2_fpas0_si944_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr2_fpas0_si944_vocoder.wav"></audio></td><td><audio controls preload="none" src="audio/dr2_fpas0_si944_target_phase.wav"></audio></td><td><audio controls preload="none" src="audio/dr2_fpas0_si944_vocoder_phase.wav"></audio></td></tr>
+<tr><th scope="row"><div class="utt">dr8/mjln0/si1449</div><div class="meta">Male speaker</div><div class="text">“Chief interest in radiosterilization resides in the military services.”</div></th><td><audio controls preload="none" src="audio/dr8_mjln0_si1449_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr8_mjln0_si1449_vocoder.wav"></audio></td><td><audio controls preload="none" src="audio/dr8_mjln0_si1449_target_phase.wav"></audio></td><td><audio controls preload="none" src="audio/dr8_mjln0_si1449_vocoder_phase.wav"></audio></td></tr>
+<tr><th scope="row"><div class="utt">dr4/fjlm0/si1043</div><div class="meta">Female speaker</div><div class="text">“Not surprisingly this approach did not work.”</div></th><td><audio controls preload="none" src="audio/dr4_fjlm0_si1043_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr4_fjlm0_si1043_vocoder.wav"></audio></td><td><audio controls preload="none" src="audio/dr4_fjlm0_si1043_target_phase.wav"></audio></td><td><audio controls preload="none" src="audio/dr4_fjlm0_si1043_vocoder_phase.wav"></audio></td></tr>
+<tr><th scope="row"><div class="utt">dr4/mtls0/si2000</div><div class="meta">Male speaker</div><div class="text">“We can get it if we dig he said patiently.”</div></th><td><audio controls preload="none" src="audio/dr4_mtls0_si2000_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr4_mtls0_si2000_vocoder.wav"></audio></td><td><audio controls preload="none" src="audio/dr4_mtls0_si2000_target_phase.wav"></audio></td><td><audio controls preload="none" src="audio/dr4_mtls0_si2000_vocoder_phase.wav"></audio></td></tr>
+<tr><th scope="row"><div class="utt">dr7/fdhc0/si929</div><div class="meta">Female speaker</div><div class="text">“But such cases were in the past unusual.”</div></th><td><audio controls preload="none" src="audio/dr7_fdhc0_si929_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr7_fdhc0_si929_vocoder.wav"></audio></td><td><audio controls preload="none" src="audio/dr7_fdhc0_si929_target_phase.wav"></audio></td><td><audio controls preload="none" src="audio/dr7_fdhc0_si929_vocoder_phase.wav"></audio></td></tr>
+<tr><th scope="row"><div class="utt">dr7/mgrt0/si2080</div><div class="meta">Male speaker</div><div class="text">“He would not carry a brief case.”</div></th><td><audio controls preload="none" src="audio/dr7_mgrt0_si2080_original.wav"></audio></td><td><audio controls preload="none" src="audio/dr7_mgrt0_si2080_vocoder.wav"></audio></td><td><audio controls preload="none" src="audio/dr7_mgrt0_si2080_target_phase.wav"></audio></td><td><audio controls preload="none" src="audio/dr7_mgrt0_si2080_vocoder_phase.wav"></audio></td></tr>
 </tbody>
 </table>
 </div>
